@@ -1,7 +1,7 @@
 # docker build -t ericsgagnon/buildpack-deps-cuda:ubuntu20.04-cuda11.1 -f Dockerfile .
 # overview: this image simply mimics buildpack-deps but uses nvidia's official devel cuda image as base
 
-FROM nvidia/cuda:11.1-devel-ubuntu20.04
+FROM nvidia/cudagl:11.0-devel-ubuntu20.04
 
 # environment variables
 ENV DEBIAN_FRONTEND=noninteractive
