@@ -1,8 +1,10 @@
-# docker build --pull -t ericsgagnon/buildpack-deps-cuda:ubuntu20.04-cuda11.0 -f Dockerfile .
-# docker run --rm --name buildpacks-nvidia-dev --gpus all ericsgagnon/buildpack-deps-cuda:ubuntu20.04-cuda11.0 nvidia-smi
+# docker build --pull -t ericsgagnon/buildpack-deps-cuda:cuda11.2-ubuntu20.04 -f Dockerfile .
+# docker run --rm --name buildpacks-nvidia-dev --gpus all ericsgagnon/buildpack-deps-cuda:cuda11.2-ubuntu20.04 nvidia-smi
 # overview: this image simply mimics buildpack-deps but uses nvidia's official devel cuda image as base
 
-FROM nvidia/cudagl:11.0-devel-ubuntu20.04
+#FROM nvidia/cudagl:11.0-devel-ubuntu20.04
+
+FROM nvidia/cudagl:11.2.0-devel-ubuntu20.04
 
 # environment variables
 ENV DEBIAN_FRONTEND=noninteractive
