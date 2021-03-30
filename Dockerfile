@@ -4,7 +4,7 @@
 
 #FROM nvidia/cudagl:11.0-devel-ubuntu20.04
 
-FROM nvidia/cudagl:11.2.0-devel-ubuntu20.04
+FROM nvidia/cudagl:11.2.2-devel-ubuntu20.04
 
 # environment variables
 ENV DEBIAN_FRONTEND=noninteractive
