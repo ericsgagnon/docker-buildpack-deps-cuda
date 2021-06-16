@@ -1,2 +1,6 @@
-# docker-buildpack-deps-cuda
-mimic buildpack-deps using nvidia's official cuda image as a base
+# docker-buildpack-deps-cuda  
+
+-  base: nvidia-cudagl devel ubuntu
+-  mimic: buildpack-deps curl-scm-(final) dockerfile build
+-  add: cudann, libnvinfer for tensorflow, etc.
+
