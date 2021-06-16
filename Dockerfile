@@ -1,10 +1,11 @@
-# docker build --pull -t ericsgagnon/buildpack-deps-cuda:cuda11.2-ubuntu20.04 -f Dockerfile .
-# docker run --rm --name buildpacks-nvidia-dev --gpus all ericsgagnon/buildpack-deps-cuda:cuda11.2-ubuntu20.04 nvidia-smi
-# overview: this image simply mimics buildpack-deps but uses nvidia's official devel cuda image as base
+# docker build --pull -t ericsgagnon/buildpack-deps-cuda:cuda11.3-ubuntu20.04 -f Dockerfile .
+# docker run --rm --name buildpacks-nvidia-dev --gpus all ericsgagnon/buildpack-deps-cuda:cuda11.3-ubuntu20.04 nvidia-smi
+# docker push ericsgagnon/buildpack-deps-cuda:cuda11.3-ubuntu20.04
+# overview: this image mimics buildpack-deps but uses 
+# nvidia's official devel cuda image as base and adds
+# the full cuda toolkit for tensorflow
 
-#FROM nvidia/cudagl:11.0-devel-ubuntu20.04
-
-FROM nvidia/cudagl:11.2.2-devel-ubuntu20.04
+FROM nvidia/cudagl:11.3.1-devel-ubuntu20.04
 
 # environment variables
 ENV DEBIAN_FRONTEND=noninteractive
@@ -113,4 +114,17 @@ RUN set -ex; \
 		) \
 	; \
 	rm -rf /var/lib/apt/lists/*
+
+# add additional cuda libraries for tensorflow, etc.
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+	libcudnn8 \
+	libcudnn8-dev \
+	libnvinfer-dev \
+	libnvinfer-plugin-dev \
+	libnvinfer-plugin8 \
+	libnvinfer8 \
+	python3-libnvinfer \
+	python3-libnvinfer-dev
+
 
