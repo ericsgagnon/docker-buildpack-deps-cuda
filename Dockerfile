@@ -1,9 +1,6 @@
-# docker build --pull -t ericsgagnon/buildpack-deps-cuda:cuda11.3-ubuntu20.04 -f Dockerfile .
-# docker run --rm --name buildpacks-nvidia-dev --gpus all ericsgagnon/buildpack-deps-cuda:cuda11.3-ubuntu20.04 nvidia-smi
-# docker push ericsgagnon/buildpack-deps-cuda:cuda11.3-ubuntu20.04
-# overview: this image mimics buildpack-deps but uses 
-# nvidia's official devel cuda image as base and adds
-# the full cuda toolkit for tensorflow
+# this image mimics buildpack-deps but uses 
+# nvidia's official devel cuda image as base 
+# and adds the full cuda toolkit for tensorflow
 
 FROM nvidia/cudagl:11.3.1-devel-ubuntu20.04
 
@@ -13,7 +10,7 @@ ENV TZ=UTC
 ENV LANG=en_US.UTF-8
 ENV PASSWORD password
 ENV SHELL=/bin/bash
-ENV WORKSPACE=/workspace
+ENV WORKSPACE=/tmp/workspace/buildpack-deps-cuda
 
 # this may not be necessary but may give insight on source files
 COPY . ${WORKSPACE}/
@@ -115,16 +112,37 @@ RUN set -ex; \
 	; \
 	rm -rf /var/lib/apt/lists/*
 
-# add additional cuda libraries for tensorflow, etc.
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
+# install additional libraries for developing/running cuda/tensorflow apps 
+RUN apt-get update && apt-get install -y --no-install-recommends software-properties-common \
+	&& add-apt-repository "deb https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu2004/x86_64 /" \
+	&& apt-get update \
+	&& apt-get install -y  --no-install-recommends \
+	cuda-cudart-11-3 \
+	cuda-cudart-dev-11-3 \
+	cuda-compat-11-3 \
+    cuda-command-line-tools-11-3 \
+    cuda-libraries-11-3 \
+    cuda-libraries-dev-11-3 \
+    cuda-minimal-build-11-3 \
+    cuda-nvml-dev-11-3 \
+    cuda-nvtx-11-3 \
+    libcublas-11-3 \
 	libcudnn8 \
 	libcudnn8-dev \
-	libnvinfer-dev \
-	libnvinfer-plugin-dev \
-	libnvinfer-plugin8 \
+    libcusparse-11-3 \
+    libnccl2 \
+    libnpp-11-3 \
 	libnvinfer8 \
+	libnvinfer-dev \
+	libnvinfer-plugin8 \
+	libnvinfer-plugin-dev \
 	python3-libnvinfer \
-	python3-libnvinfer-dev
-
+	python3-libnvinfer-dev \
+    libtinfo5 \
+	libncursesw5 \
+    libnpp-dev-11-3 \
+    libnccl-dev \
+    libcublas-dev-11-3 \
+    libcusparse-dev-11-3
 

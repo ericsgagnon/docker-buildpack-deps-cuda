@@ -2,5 +2,5 @@
 
 -  base: nvidia-cudagl devel ubuntu
 -  mimic: buildpack-deps curl-scm-(final) dockerfile build
--  add: cudann, libnvinfer for tensorflow, etc.
+-  add: cudann, libnvinfer, etc. for tensorflow
 
