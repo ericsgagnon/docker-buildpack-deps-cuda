@@ -120,7 +120,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends software-proper
 	&& apt-get install -y  --no-install-recommends \
 	cuda-cudart-11-3 \
 	cuda-cudart-dev-11-3 \
-	cuda-compat-11-3 \
     cuda-command-line-tools-11-3 \
     cuda-libraries-11-3 \
     cuda-libraries-dev-11-3 \
@@ -144,5 +143,5 @@ RUN apt-get update && apt-get install -y --no-install-recommends software-proper
     libnpp-dev-11-3 \
     libnccl-dev \
     libcublas-dev-11-3 \
-    libcusparse-dev-11-3
-
+    libcusparse-dev-11-3 \
+	&& apt-get remove -y libxnvctrl0 cuda-compat-11-3
