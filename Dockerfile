@@ -2,7 +2,7 @@
 # nvidia's official devel cuda image as base 
 # and adds the full cuda toolkit for tensorflow
 
-FROM nvidia/cudagl:11.4.0-devel-ubuntu20.04
+FROM nvidia/cudagl:11.4.2-devel-ubuntu20.04
 
 # environment variables
 ENV DEBIAN_FRONTEND=noninteractive
