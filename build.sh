@@ -3,8 +3,8 @@
 BUILD_IMAGE_W_TAG=$1
 
 # configure tags ###############################################################################
-build_image_w_tag=${BUILD_IMAGE_W_TAG:=ericsgagnon/buildpack-deps-cuda:cuda11.4-ubuntu20.04}
-additional_image_tag=${ADDITIONAL_IMAGE_TAG:=ericsgagnon/buildpack-deps-cuda:cuda11-ubuntu20.04}
+build_image_w_tag=${BUILD_IMAGE_W_TAG:=ericsgagnon/buildpack-deps-cuda:cuda11.7-ubuntu22.04}
+additional_image_tag=${ADDITIONAL_IMAGE_TAG:=ericsgagnon/buildpack-deps-cuda:cuda11-ubuntu22.04}
 
 # configure and build ##########################################################################
 root_dir=$(git rev-parse --show-toplevel)
@@ -32,7 +32,7 @@ if [[ ${push_exit_code} -ne 0 ]] ; then
   exit 1
 fi
 
-# re-tag and push ##############################################################################
+# # re-tag and push ##############################################################################
 echo "docker tag  ${build_image_w_tag} ${additional_image_tag}"
 docker tag  ${build_image_w_tag} ${additional_image_tag}
 echo "docker push ${additional_image_tag}"
@@ -45,9 +45,9 @@ fi
 
 # how to test ##################################################################################
 echo "test the image by:"
-echo "docker run -d -i -t --name buildpack-deps --gpus all ${build_image_w_tag} && docker exec -i -t buildpack-deps /bin/bash"
+echo "docker run -d -i -t --name buildpack-deps-dev --gpus all ${build_image_w_tag} && docker exec -i -t buildpack-deps-dev /bin/bash"
 echo "or:"
-echo "docker run --rm -i -t --name buildpack-deps --gpus all ${build_image_w_tag} nvidia-smi"
+echo "docker run --rm -i -t --name buildpack-deps-dev --gpus all ${build_image_w_tag} nvidia-smi"
 echo "# cleanup"
-echo "docker rm -fv buildpack-deps"
+echo "docker rm -fv buildpack-deps-dev"
 
