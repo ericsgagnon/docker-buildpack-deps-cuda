@@ -3,8 +3,8 @@
 BUILD_IMAGE_W_TAG=$1
 
 # configure tags ###############################################################################
-build_image_w_tag=${BUILD_IMAGE_W_TAG:=ericsgagnon/buildpack-deps-cuda:cuda11.7-ubuntu22.04}
-additional_image_tag=${ADDITIONAL_IMAGE_TAG:=ericsgagnon/buildpack-deps-cuda:cuda11-ubuntu22.04}
+build_image_w_tag=${BUILD_IMAGE_W_TAG:=ericsgagnon/buildpack-deps-cuda:cuda12.1-ubuntu22.04}
+additional_image_tag=${ADDITIONAL_IMAGE_TAG:=ericsgagnon/buildpack-deps-cuda:cuda12-ubuntu22.04}
 
 # configure and build ##########################################################################
 root_dir=$(git rev-parse --show-toplevel)
